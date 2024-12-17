@@ -1,6 +1,8 @@
 const { Router } = require("express");
 const bcrypt = require("bcrypt");
 const UserModel = require("../Model/UserSchema");
+const ProductModel = require("../Model/ProductSchema");
+
 
 const UserRouter = Router();
 
