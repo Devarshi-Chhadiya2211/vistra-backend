@@ -43,4 +43,20 @@ UserRouter.post("/login", async (req, res) => {
   }
 });
 
+
+UserRouter.post("/addproduct", async (req, res) => {
+  try {
+     
+      let obj = {
+        imagelink: req.body.imagelink,
+        price: req.body.price,
+      };
+      let data = await ProductModel.create(obj);
+      res.status(200).send({ msg: "Product Added successfully", data });
+  } catch (error) {
+    res.status(501).send({ msg: error.message });
+  }
+});
+
+
 module.exports = UserRouter;
