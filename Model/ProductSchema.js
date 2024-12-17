@@ -5,7 +5,7 @@ const ProductSchema = mongooose.Schema({
   price: { type: String, require: true },
 });
 
-const ProductModel = mongooose.model("users", ProductSchema);
+const ProductModel = mongooose.model("product", ProductSchema);
 
 module.exports = ProductModel;
 
