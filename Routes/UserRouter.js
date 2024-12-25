@@ -2,7 +2,7 @@ const { Router } = require("express");
 const bcrypt = require("bcrypt");
 const UserModel = require("../Model/UserSchema");
 const ProductModel = require("../Model/ProductSchema");
-
+const CartModel = require("../Model/CartSchema");
 
 const UserRouter = Router();
 
@@ -48,10 +48,10 @@ UserRouter.post("/login", async (req, res) => {
 
 UserRouter.post("/addproduct", async (req, res) => {
   try {
-     
       let obj = {
-        imagelink: req.body.imagelink,
-        price: req.body.price,
+        img: req.body.imagelink,
+        productname: req.body.productname,
+        productprice: req.body.productprice,
       };
       let data = await ProductModel.create(obj);
       res.status(200).send({ msg: "Product Added successfully", data });
@@ -59,6 +59,32 @@ UserRouter.post("/addproduct", async (req, res) => {
     res.status(501).send({ msg: error.message });
   }
 });
+UserRouter.post("/cart", async (req, res) => {
+  try {
+    
+      let data = await CartModel.create(obj);
+      res.status(200).send({ msg: "Product Added successfully", data });
+  } catch (error) {
+    res.status(501).send({ msg: error.message });
+  }
+});
+UserRouter.get("/cart", async (req, res) => {
+  try {
+      let data = await CartModel.find();
+      res.status(200).send({ msg: "Product Added successfully", data });
+  } catch (error) {
+    res.status(501).send({ msg: error.message });
+  }
+});
+
+UserRouter.get('/allproduct',async(req,res)=>{
+  try {
+    let data=await ProductModel.find()
+    res.status(200).send({ msg: "Products",data});
+  } catch (error) {
+    res.status(501).send({ msg: error.message });
+  }
+})
 
 
 module.exports = UserRouter;
