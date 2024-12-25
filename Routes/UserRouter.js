@@ -17,7 +17,7 @@ UserRouter.post("/register", async (req, res) => {
         email: req.body.email,
         password: hash,
       };
-      let data = await UserModel.create(obj);
+      let data = await UserModel.create(req.body);
       res.status(200).send({ msg: "User registered successfully", data });
     });
   } catch (error) {
